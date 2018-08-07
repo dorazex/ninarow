@@ -19,11 +19,9 @@ public class XmlLoader {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
 
-            //optional, but recommended
-            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
 
-            System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
+//            System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
 
             NodeList gameNodeList = doc.getElementsByTagName("Game");
             Element gameElement = (Element) gameNodeList.item(0);

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ConsoleUserInterface/ConsoleUserInterface.iml" filepath="$PROJECT_DIR$/ConsoleUserInterface/ConsoleUserInterface.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameEngine/GameEngine.iml" filepath="$PROJECT_DIR$/GameEngine/GameEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/XmlLoader/XmlLoader.iml" filepath="$PROJECT_DIR$/XmlLoader/XmlLoader.iml" />
       <module fileurl="file://$PROJECT_DIR$/ninarow.iml" filepath="$PROJECT_DIR$/ninarow.iml" />
