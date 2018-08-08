@@ -59,6 +59,10 @@ public class Game {
         this.currentPlayerIndex = (this.currentPlayerIndex+ 1) % this.players.size();
     }
 
+    private Boolean isEndWithWinner(){
+        return this.board.isTargetReached(this.target);
+    }
+
     public void start(ArrayList<Player> players){
         this.players = players;
         this.board.addPlayers(this.players);
@@ -68,10 +72,12 @@ public class Game {
     }
 
     public Boolean makeTurn(){
-
         TurnRecord turnRecord = this.players.get(this.currentPlayerIndex).makeTurn(this.board);
+        if (this.isEndWithWinner()){
+            this.winnerPlayer = this.players.get(this.currentPlayerIndex);
+            return true;
+        }
         this.advanceToNextPlayer();
-
         return this.board.isFull();
     }
 

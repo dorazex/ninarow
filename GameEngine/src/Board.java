@@ -59,6 +59,37 @@ public class Board {
         return count;
     }
 
+    private static Boolean isTargetInSequence(String sequence, Integer target){
+        return sequence.matches(String.format("[^0]{%d}", target));
+    }
+
+    private Integer getCellContent(Integer row, Integer column){
+        return this.cells.get(column).get(row);
+    }
+
+    public Boolean isTargetReached(Integer target){
+        String sequenceToCheck = "";
+        for (int i = 0; i < this.rows; i++) {
+            sequenceToCheck = "";
+            for (ArrayList<Integer> column: this.cells){
+                sequenceToCheck += column.get(i);
+            }
+            if (Board.isTargetInSequence(sequenceToCheck, target)) return true;
+        }
+
+        for (ArrayList<Integer> column: this.cells){
+            sequenceToCheck = "";
+            for (Integer cellContent: column){
+                sequenceToCheck += String.format("%d", cellContent);
+            }
+            if (Board.isTargetInSequence(sequenceToCheck, target)) return true;
+        }
+
+
+
+        return false;
+    }
+
     public Boolean isFull(){
         return this.countAvailableCells().equals(0);
     }
