@@ -1,5 +1,5 @@
 public abstract class PlayerCommon implements Player {
-    private Integer turnsCount;
+    protected Integer turnsCount;
     private Integer id;
     private String discType;
 
@@ -26,6 +26,6 @@ public abstract class PlayerCommon implements Player {
 
     @Override
     public String toString() {
-        return String.format("Player '%d': disc=%s, turns=%d\n", this.id, this.discType, this.turnsCount);
+        return String.format("Player #%d: disc=%s, turns=%d\n", this.id, this.discType, this.turnsCount);
     }
 }

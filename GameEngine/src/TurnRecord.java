@@ -1,16 +1,16 @@
 public class TurnRecord {
     private Player player;
-    private int column;
+    private Integer column;
 
     public Player getPlayer() {
         return player;
     }
 
-    public int getColumn() {
+    public Integer getColumn() {
         return column;
     }
 
-    public TurnRecord(Player player, int column){
+    public TurnRecord(Player player, Integer column){
         this.player = player;
         this.column = column;
     }

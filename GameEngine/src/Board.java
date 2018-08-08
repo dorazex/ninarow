@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,19 +46,33 @@ public class Board {
     }
 
     private Integer getAvailableIndexInColumn(int column){
-        return this.cells.get(column).indexOf(0);
+        return this.cells.get(column).lastIndexOf(0);
+    }
+
+    private Integer countAvailableCells(){
+        Integer count = 0;
+        for (ArrayList<Integer> column: this.cells){
+            for (Integer cellContent: column){
+                if (cellContent.equals(0)) count+=1;
+            }
+        }
+        return count;
+    }
+
+    public Boolean isFull(){
+        return this.countAvailableCells().equals(0);
     }
 
     public void addPlayers(ArrayList<Player> players){
         for (Player player: players){
-            this.playersDiscTypeMap.put(player.getId(), player.getDiscType());
+            this.playersDiscTypeMap.put(player.getId() + 1, player.getDiscType());
         }
     }
 
     public TurnRecord putDisc(Player player, int column){
         TurnRecord turnRecord = null;
         if (this.canInsert(column)){
-            this.cells.get(column).set(this.getAvailableIndexInColumn(column), player.getId());
+            this.cells.get(column).set(this.getAvailableIndexInColumn(column), player.getId() + 1);
             turnRecord = new TurnRecord(player, column);
         }
         return turnRecord;
@@ -65,13 +80,17 @@ public class Board {
 
     @Override
     public String toString() {
-
         String boardString = "";
         for (int i = 0; i < this.rows; i++) {
+            boardString += String.format("%d ", this.rows - i);
             for (ArrayList<Integer> column: this.cells){
                 boardString += this.playersDiscTypeMap.get(column.get(i)) + " ";
             }
             boardString += "\n";
+        }
+        boardString += "  ";
+        for (int i = 0; i < this.columns; i++) {
+            boardString += String.format("%d ", i + 1);
         }
 
         return boardString;

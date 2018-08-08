@@ -9,6 +9,7 @@ public class Game {
     private Boolean isStarted;
     private Integer currentPlayerIndex;
     private Date startDate;
+    private Player winnerPlayer;
 
     public int getTarget() { return target; }
 
@@ -24,6 +25,10 @@ public class Game {
         return currentPlayerIndex;
     }
 
+    public Player getWinnerPlayer(){
+        return this.winnerPlayer;
+    }
+
     public Game(){};
 
     public Game(int target, int rows, int columns){
@@ -32,6 +37,7 @@ public class Game {
         this.isStarted = false;
         this.currentPlayerIndex = 0;
         this.startDate = null;
+        this.winnerPlayer = null;
     }
 
     public Game(int target, Board board){
@@ -49,13 +55,24 @@ public class Game {
         return String.format("%d:%d", minutes, seconds);
     }
 
+    private void advanceToNextPlayer(){
+        this.currentPlayerIndex = (this.currentPlayerIndex+ 1) % this.players.size();
+    }
+
     public void start(ArrayList<Player> players){
         this.players = players;
         this.board.addPlayers(this.players);
 
-
         this.isStarted = true;
         this.startDate = new Date();
+    }
+
+    public Boolean makeTurn(){
+
+        TurnRecord turnRecord = this.players.get(this.currentPlayerIndex).makeTurn(this.board);
+        this.advanceToNextPlayer();
+
+        return this.board.isFull();
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class ConsoleUserInterface {
     private Game game;
     private Integer command;
-    private String inputString;
     private Scanner scanner;
 
     public Game getGame() {
@@ -17,20 +16,19 @@ public class ConsoleUserInterface {
         return command;
     }
 
-    private void getInput(String instructionMessage){
+    private String getInput(String instructionMessage){
         if (instructionMessage!=null){
-            System.out.println(instructionMessage);
+            System.out.print(instructionMessage);
         }
 
-        this.inputString = scanner.nextLine();
+        return scanner.nextLine();
     }
 
     private Integer parseCommand(){
         try {
-            return Integer.parseInt(this.inputString);
+            return Integer.parseInt(this.getInput(Constants.CHOOSE_COMMAND_PROMPT));
         } catch (NumberFormatException e){
             System.out.println(Constants.INVALID_INPUT_PROMPT);
-            this.getInput(Constants.CHOOSE_COMMAND_PROMPT);
             return this.parseCommand();
         }
     }
@@ -38,7 +36,6 @@ public class ConsoleUserInterface {
     public ConsoleUserInterface(){
         this.game = null;
         this.command = -1;
-        this.inputString = "";
         this.scanner = new Scanner(System.in);
     }
 
@@ -65,7 +62,7 @@ public class ConsoleUserInterface {
             playerConsoleIndex = 1;
         }
 
-        PlayerConsole playerConsole = new PlayerConsole(playerConsoleIndex, "X");
+        PlayerConsole playerConsole = new PlayerConsole(playerConsoleIndex, "X", this.scanner);
         PlayerComputer playerComputer = new PlayerComputer(playerComputerIndex, "O");
         players.add(playerConsole);
         players.add(playerComputer);
@@ -74,11 +71,15 @@ public class ConsoleUserInterface {
 
     public void startUI(){
         System.out.println(Constants.START_PROMPT);
-        while (!this.command.equals(Constants.COMMAND_EXIT)){
+        Boolean isGameEnded = false;
+
+        while (!this.command.equals(Constants.COMMAND_EXIT) && !isGameEnded){
+
+            this.command = this.parseCommand();
+
             switch (this.command){
                 case Constants.COMMAND_LOAD: // Load game from XML
-                    this.getInput(Constants.CONFIG_FILE_PATH_PROMPT);
-                    createGame(this.inputString);
+                    createGame(this.getInput(Constants.CONFIG_FILE_PATH_PROMPT));
                     System.out.println(Constants.GAME_LOADED_PROMPT);
                     break;
                 case Constants.COMMAND_START: // Start game
@@ -92,19 +93,34 @@ public class ConsoleUserInterface {
                     System.out.println(this.game.toString());
                     break;
                 case Constants.COMMAND_TURN: // Make turn
+                    if (this.game.getPlayers().get(this.game.getCurrentPlayerIndex())
+                            .getClass().getName().contains("Console")){
+                        System.out.println(this.game.toString());
+                    }
+                    Boolean isBoardFull = this.game.makeTurn();
+                    if (!isBoardFull) {
+                        System.out.println(this.game.toString());
+                    } else {
+                        isGameEnded = true;
+                    }
                     break;
                 case Constants.COMMAND_HISTORY: // History
                     break;
+                case Constants.COMMAND_EXIT:
+                    break;
                 default:
+                    System.out.println(Constants.INVALID_INPUT_PROMPT);
                     break;
             }
 
-
-
-
-            // Get next command
-            this.getInput(Constants.CHOOSE_COMMAND_PROMPT);
-            this.command = this.parseCommand();
+            if (isGameEnded){
+                Player winner = this.game.getWinnerPlayer();
+                if (winner != null){
+                    System.out.print("\n\n THE WINNER IS: " + winner.getId() + "!\n");
+                } else {
+                    System.out.println("\n\n GAME ENDED IN A TIE!\n");
+                }
+            }
         }
         System.out.println(Constants.EXIT_PROMPT);
     }
