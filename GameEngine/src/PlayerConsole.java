@@ -1,12 +1,6 @@
-public class PlayerConsole implements Player {
-    @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public String getDiscType() {
-        return null;
+public class PlayerConsole extends PlayerCommon {
+    public PlayerConsole(String id, String discType){
+        super(id, discType);
     }
 
     @Override

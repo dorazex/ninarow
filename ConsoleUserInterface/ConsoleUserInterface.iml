@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="GameEngine" />
-    <orderEntry type="module" module-name="XmlLoader" />
+    <orderEntry type="module" module-name="GameEngine" exported="" />
+    <orderEntry type="module" module-name="XmlLoader" exported="" />
   </component>
 </module>

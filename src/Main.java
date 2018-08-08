@@ -8,7 +8,7 @@ public class Main {
         System.out.println("Started running");
 
         // TODO: Remove this
-        String configFilePath = "/home/duke/Downloads/ex1-small.xml";
+//        String configFilePath = "/home/duke/Downloads/ex1-small.xml";
 
 
         ConsoleUserInterface consoleUserInterface = new ConsoleUserInterface();

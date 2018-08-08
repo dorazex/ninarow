@@ -9,6 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="GameEngine" exported="" />
     <orderEntry type="module" module-name="XmlLoader" exported="" />
-    <orderEntry type="module" module-name="ConsoleUserInterface" />
+    <orderEntry type="module" module-name="ConsoleUserInterface" exported="" />
   </component>
 </module>

@@ -1,12 +1,6 @@
-public class PlayerComputer implements Player{
-    @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public String getDiscType() {
-        return null;
+public class PlayerComputer extends PlayerCommon {
+    public PlayerComputer(String id, String discType){
+        super(id, discType);
     }
 
     @Override

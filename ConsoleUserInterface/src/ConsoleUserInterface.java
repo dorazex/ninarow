@@ -41,9 +41,8 @@ public class ConsoleUserInterface {
         this.scanner = new Scanner(System.in);
     }
 
-    public void createGame(){
-        //TODO: Remove this
-        String configFilePath = "/home/duke/Downloads/ex1-small.xml";
+    public void createGame(String configFilePath){
+//        configFilePath = "/home/duke/Downloads/ex1-small.xml";
 
         HashMap<String, Object> parametersMap = XmlLoader.getGameBasicInitParameters(configFilePath);
         String variant = (String) parametersMap.get("variant");
@@ -58,17 +57,24 @@ public class ConsoleUserInterface {
         System.out.println(Constants.START_PROMPT);
         while (!this.command.equals(Constants.COMMAND_EXIT)){
             switch (this.command){
-                case 1:
-                    createGame();
+                case Constants.COMMAND_LOAD: // Load game from XML
+                    this.getInput(Constants.CONFIG_FILE_PATH_PROMPT);
+                    createGame(this.inputString);
                     System.out.println(Constants.GAME_LOADED_PROMPT);
                     break;
-                case 2:
+                case Constants.COMMAND_START: // Start game
+                    if (this.game.getIsStarted()){
+                        System.out.println(Constants.INVALID_COMMAND_GAME_ALREADY_STARTED);
+                    } else{
+                        this.game.start();
+                    }
                     break;
-                case 3:
+                case Constants.COMMAND_SHOW: // Show game
+                    System.out.println(this.game.toString());
                     break;
-                case 4:
+                case Constants.COMMAND_TURN: // Make turn
                     break;
-                case 5:
+                case Constants.COMMAND_HISTORY: // History
                     break;
                 default:
                     break;
