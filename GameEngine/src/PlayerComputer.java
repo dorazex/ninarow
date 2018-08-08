@@ -1,5 +1,5 @@
 public class PlayerComputer extends PlayerCommon {
-    public PlayerComputer(String id, String discType){
+    public PlayerComputer(Integer id, String discType){
         super(id, discType);
     }
 

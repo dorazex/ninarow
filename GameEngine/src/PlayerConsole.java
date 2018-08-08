@@ -1,5 +1,5 @@
 public class PlayerConsole extends PlayerCommon {
-    public PlayerConsole(String id, String discType){
+    public PlayerConsole(Integer id, String discType){
         super(id, discType);
     }
 

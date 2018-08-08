@@ -26,10 +26,17 @@ public class Game {
 
     public Game(){};
 
-    public Game(int target, int rows, int columns, ArrayList<Player> players){
+    public Game(int target, int rows, int columns){
         this.target = target;
         this.board = new Board(rows, columns);
-        this.players = players;
+        this.isStarted = false;
+        this.currentPlayerIndex = 0;
+        this.startDate = null;
+    }
+
+    public Game(int target, Board board){
+        this.target = target;
+        this.board = board;
         this.isStarted = false;
         this.currentPlayerIndex = 0;
         this.startDate = null;
@@ -42,17 +49,11 @@ public class Game {
         return String.format("%d:%d", minutes, seconds);
     }
 
-
-    public Game(int target, Board board, ArrayList<Player> players){
-        this.target = target;
-        this.board = board;
+    public void start(ArrayList<Player> players){
         this.players = players;
-        this.isStarted = false;
-        this.currentPlayerIndex = 0;
-        this.startDate = null;
-    }
+        this.board.addPlayers(this.players);
 
-    public void start(){
+
         this.isStarted = true;
         this.startDate = new Date();
     }

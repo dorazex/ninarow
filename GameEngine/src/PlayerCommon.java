@@ -1,9 +1,9 @@
 public abstract class PlayerCommon implements Player {
     private Integer turnsCount;
-    private String id;
+    private Integer id;
     private String discType;
 
-    public PlayerCommon(String id, String discType){
+    public PlayerCommon(Integer id, String discType){
         this.turnsCount = 0;
         this.id = id;
         this.discType = discType;
@@ -15,7 +15,7 @@ public abstract class PlayerCommon implements Player {
     }
 
     @Override
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -26,6 +26,6 @@ public abstract class PlayerCommon implements Player {
 
     @Override
     public String toString() {
-        return String.format("Player '%s': disc=%s, turns=%d\n", this.id, this.discType, this.turnsCount);
+        return String.format("Player '%d': disc=%s, turns=%d\n", this.id, this.discType, this.turnsCount);
     }
 }

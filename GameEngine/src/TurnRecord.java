@@ -1,25 +1,25 @@
 public class TurnRecord {
     private Player player;
-    private int row;
+    private int column;
 
     public Player getPlayer() {
         return player;
     }
 
-    public int getRow() {
-        return row;
+    public int getColumn() {
+        return column;
     }
 
-    public TurnRecord(Player player, int row){
+    public TurnRecord(Player player, int column){
         this.player = player;
-        this.row = row;
+        this.column = column;
     }
 
     @Override
     public String toString() {
-        return String.format("Player <%s> have put a disc of type <%s> at row <%d>",
+        return String.format("Player <%s> have put a disc of type <%s> at column <%d>",
                 this.player.getId(),
                 this.player.getDiscType(),
-                this.row);
+                this.column);
     }
 }

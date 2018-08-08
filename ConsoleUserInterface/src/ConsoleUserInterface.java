@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleUserInterface {
@@ -41,7 +42,7 @@ public class ConsoleUserInterface {
         this.scanner = new Scanner(System.in);
     }
 
-    public void createGame(String configFilePath){
+    private void createGame(String configFilePath){
 //        configFilePath = "/home/duke/Downloads/ex1-small.xml";
 
         HashMap<String, Object> parametersMap = XmlLoader.getGameBasicInitParameters(configFilePath);
@@ -50,7 +51,25 @@ public class ConsoleUserInterface {
         Integer rows = (Integer) parametersMap.get("rows");
         Integer columns = (Integer) parametersMap.get("columns");
 
-        this.game = new Game(target, rows, columns, new ArrayList<Player>());
+        this.game = new Game(target, rows, columns);
+    }
+
+    private ArrayList<Player> generatePlayers(){
+        ArrayList<Player> players = new ArrayList<>();
+
+        Integer playerConsoleIndex;
+        Integer playerComputerIndex = new Random().nextInt(2) + 1;
+        if (playerComputerIndex.equals(1)){
+            playerConsoleIndex = 2;
+        } else {
+            playerConsoleIndex = 1;
+        }
+
+        PlayerConsole playerConsole = new PlayerConsole(playerConsoleIndex, "X");
+        PlayerComputer playerComputer = new PlayerComputer(playerComputerIndex, "O");
+        players.add(playerConsole);
+        players.add(playerComputer);
+        return players;
     }
 
     public void startUI(){
@@ -66,7 +85,7 @@ public class ConsoleUserInterface {
                     if (this.game.getIsStarted()){
                         System.out.println(Constants.INVALID_COMMAND_GAME_ALREADY_STARTED);
                     } else{
-                        this.game.start();
+                        this.game.start(this.generatePlayers());
                     }
                     break;
                 case Constants.COMMAND_SHOW: // Show game
