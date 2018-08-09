@@ -97,8 +97,8 @@ public class ConsoleUserInterface {
                             .getClass().getName().contains("Console")){
                         System.out.println(this.game.toString());
                     }
-                    Boolean isBoardFull = this.game.makeTurn();
-                    if (!isBoardFull) {
+                    isGameEnded = this.game.makeTurn();
+                    if (!isGameEnded) {
                         System.out.println(this.game.toString());
                     } else {
                         isGameEnded = true;
@@ -107,6 +107,7 @@ public class ConsoleUserInterface {
                 case Constants.COMMAND_HISTORY: // History
                     break;
                 case Constants.COMMAND_EXIT:
+                    System.out.println(Constants.EXIT_PROMPT);
                     break;
                 default:
                     System.out.println(Constants.INVALID_INPUT_PROMPT);
@@ -122,7 +123,6 @@ public class ConsoleUserInterface {
                 }
             }
         }
-        System.out.println(Constants.EXIT_PROMPT);
     }
 
     public static void main(String[] args) {

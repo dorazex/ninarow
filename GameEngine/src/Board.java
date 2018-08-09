@@ -7,6 +7,7 @@ public class Board {
     private int columns;
     private HashMap<Integer, String> playersDiscTypeMap;
     private ArrayList<ArrayList<Integer>> cells;
+    private Integer playersCount;
 
     public int getRows() {
         return rows;
@@ -59,8 +60,12 @@ public class Board {
         return count;
     }
 
-    private static Boolean isTargetInSequence(String sequence, Integer target){
-        return sequence.matches(String.format("[^0]{%d}", target));
+    private Boolean isTargetInSequence(String sequence, Integer target){
+        for (int i = 1; i < this.playersCount + 1; i++) {
+            if (sequence.matches(String.format(".*%d{%d}.*", i, target)))
+                return true;
+        }
+        return false;
     }
 
     private Integer getCellContent(Integer row, Integer column){
@@ -74,7 +79,7 @@ public class Board {
             for (ArrayList<Integer> column: this.cells){
                 sequenceToCheck += column.get(i);
             }
-            if (Board.isTargetInSequence(sequenceToCheck, target)) return true;
+            if (this.isTargetInSequence(sequenceToCheck, target)) return true;
         }
 
         for (ArrayList<Integer> column: this.cells){
@@ -82,10 +87,28 @@ public class Board {
             for (Integer cellContent: column){
                 sequenceToCheck += String.format("%d", cellContent);
             }
-            if (Board.isTargetInSequence(sequenceToCheck, target)) return true;
+            if (this.isTargetInSequence(sequenceToCheck, target)) return true;
         }
 
+        String boardAsLongString = "";
+        for (int i = 0; i < this.rows; i++) {
+            for (ArrayList<Integer> column: this.cells){
+                boardAsLongString += column.get(i);
+            }
+        }
 
+        for (int i = 0; i < boardAsLongString.length(); i++) {
+            sequenceToCheck = "";
+            for (int j = i; j < boardAsLongString.length(); j+=target+1) {
+                sequenceToCheck += boardAsLongString.charAt(j);
+            }
+            if (this.isTargetInSequence(sequenceToCheck, target)) return true;
+            sequenceToCheck = "";
+            for (int j = i; j < boardAsLongString.length(); j+=target-1) {
+                sequenceToCheck += boardAsLongString.charAt(j);
+            }
+            if (this.isTargetInSequence(sequenceToCheck, target)) return true;
+        }
 
         return false;
     }
@@ -96,14 +119,15 @@ public class Board {
 
     public void addPlayers(ArrayList<Player> players){
         for (Player player: players){
-            this.playersDiscTypeMap.put(player.getId() + 1, player.getDiscType());
+            this.playersDiscTypeMap.put(player.getId(), player.getDiscType());
         }
+        this.playersCount = players.size();
     }
 
     public TurnRecord putDisc(Player player, int column){
         TurnRecord turnRecord = null;
         if (this.canInsert(column)){
-            this.cells.get(column).set(this.getAvailableIndexInColumn(column), player.getId() + 1);
+            this.cells.get(column).set(this.getAvailableIndexInColumn(column), player.getId());
             turnRecord = new TurnRecord(player, column);
         }
         return turnRecord;
