@@ -10,6 +10,7 @@ public class Game {
     private Integer currentPlayerIndex;
     private Date startDate;
     private Player winnerPlayer;
+    private History history;
 
     public int getTarget() { return target; }
 
@@ -29,6 +30,10 @@ public class Game {
         return this.winnerPlayer;
     }
 
+    public History getHistory() {
+        return history;
+    }
+
     public Game(){};
 
     public Game(int target, int rows, int columns){
@@ -38,6 +43,7 @@ public class Game {
         this.currentPlayerIndex = 0;
         this.startDate = null;
         this.winnerPlayer = null;
+        this.history = new History();
     }
 
     public Game(int target, Board board){
@@ -73,6 +79,7 @@ public class Game {
 
     public Boolean makeTurn(){
         TurnRecord turnRecord = this.players.get(this.currentPlayerIndex).makeTurn(this.board);
+        this.history.pushTurn(turnRecord);
         if (this.isEndWithWinner()){
             this.winnerPlayer = this.players.get(this.currentPlayerIndex);
             return true;

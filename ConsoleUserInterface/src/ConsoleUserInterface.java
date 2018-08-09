@@ -58,14 +58,17 @@ public class ConsoleUserInterface {
         Integer playerComputerIndex = new Random().nextInt(2) + 1;
         if (playerComputerIndex.equals(1)){
             playerConsoleIndex = 2;
+            PlayerConsole playerConsole = new PlayerConsole(playerConsoleIndex, "X", this.scanner);
+            PlayerComputer playerComputer = new PlayerComputer(playerComputerIndex, "O");
+            players.add(playerComputer);
+            players.add(playerConsole);
         } else {
             playerConsoleIndex = 1;
+            PlayerConsole playerConsole = new PlayerConsole(playerConsoleIndex, "X", this.scanner);
+            PlayerComputer playerComputer = new PlayerComputer(playerComputerIndex, "O");
+            players.add(playerConsole);
+            players.add(playerComputer);
         }
-
-        PlayerConsole playerConsole = new PlayerConsole(playerConsoleIndex, "X", this.scanner);
-        PlayerComputer playerComputer = new PlayerComputer(playerComputerIndex, "O");
-        players.add(playerConsole);
-        players.add(playerComputer);
         return players;
     }
 
@@ -105,6 +108,7 @@ public class ConsoleUserInterface {
                     }
                     break;
                 case Constants.COMMAND_HISTORY: // History
+                    System.out.print(this.game.getHistory());
                     break;
                 case Constants.COMMAND_EXIT:
                     System.out.println(Constants.EXIT_PROMPT);
