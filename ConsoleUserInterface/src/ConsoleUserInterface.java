@@ -39,7 +39,7 @@ public class ConsoleUserInterface {
         this.scanner = new Scanner(System.in);
     }
 
-    private void createGame(String configFilePath){
+    private void createGame(String configFilePath) throws ConfigXmlException{
 //        configFilePath = "/home/duke/Downloads/ex1-small.xml";
 
         HashMap<String, Object> parametersMap = XmlLoader.getGameBasicInitParameters(configFilePath);
@@ -74,6 +74,7 @@ public class ConsoleUserInterface {
 
     public void startUI(){
         System.out.println(Constants.START_PROMPT);
+        Boolean isGameLoaded = false;
         Boolean isGameEnded = false;
 
         while (!this.command.equals(Constants.COMMAND_EXIT) && !isGameEnded){
@@ -82,33 +83,60 @@ public class ConsoleUserInterface {
 
             switch (this.command){
                 case Constants.COMMAND_LOAD: // Load game from XML
-                    createGame(this.getInput(Constants.CONFIG_FILE_PATH_PROMPT));
-                    System.out.println(Constants.GAME_LOADED_PROMPT);
+                    if (isGameLoaded && this.game.getIsStarted()){
+                        System.out.println(Constants.INVALID_COMMAND_GAME_ALREADY_STARTED);
+                    } else {
+                        try {
+                            createGame(this.getInput(Constants.CONFIG_FILE_PATH_PROMPT));
+                            System.out.println(this.game.toString());
+                            isGameLoaded = true;
+                        } catch (ConfigXmlException e) {
+                            System.out.print(Constants.CONFIG_XML_ERROR);
+                            System.out.println(e.getMessage());
+                        }
+                    }
                     break;
                 case Constants.COMMAND_START: // Start game
-                    if (this.game.getIsStarted()){
+                    if (!isGameLoaded){
+                        System.out.println(Constants.INVALID_COMMAND_GAME_NOT_LOADED);
+                    } else if (this.game.getIsStarted()){
                         System.out.println(Constants.INVALID_COMMAND_GAME_ALREADY_STARTED);
                     } else{
                         this.game.start(this.generatePlayers());
+                        System.out.println(Constants.GAME_SUCCESSFULLY_STARTED_PROMPT);
                     }
                     break;
                 case Constants.COMMAND_SHOW: // Show game
-                    System.out.println(this.game.toString());
-                    break;
-                case Constants.COMMAND_TURN: // Make turn
-                    if (this.game.getPlayers().get(this.game.getCurrentPlayerIndex())
-                            .getClass().getName().contains("Console")){
+                    if (!isGameLoaded){
+                        System.out.println(Constants.INVALID_COMMAND_GAME_NOT_LOADED);
+                    } else {
                         System.out.println(this.game.toString());
                     }
-                    isGameEnded = this.game.makeTurn();
-                    if (!isGameEnded) {
-                        System.out.println(this.game.toString());
+                    break;
+                case Constants.COMMAND_TURN: // Make turn
+                    if (!isGameLoaded){
+                        System.out.println(Constants.INVALID_COMMAND_GAME_NOT_LOADED);
+                    } else if(!this.game.getIsStarted()){
+                        System.out.println(Constants.INVALID_COMMAND_GAME_NOT_STARTED);
                     } else {
-                        isGameEnded = true;
+//                        if (this.game.getPlayers().get(this.game.getCurrentPlayerIndex())
+//                                .getClass().getName().contains("Console")) {
+//                            System.out.println(this.game.toString());
+//                        }
+                        isGameEnded = this.game.makeTurn();
+                        if (!isGameEnded) {
+                            System.out.println(this.game.toString());
+                        } else {
+                            isGameEnded = true;
+                        }
                     }
                     break;
                 case Constants.COMMAND_HISTORY: // History
-                    System.out.print(this.game.getHistory());
+                    if (!isGameLoaded){
+                        System.out.println(Constants.INVALID_COMMAND_GAME_NOT_LOADED);
+                    } else {
+                        System.out.print(this.game.getHistory());
+                    }
                     break;
                 case Constants.COMMAND_EXIT:
                     System.out.println(Constants.EXIT_PROMPT);

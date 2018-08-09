@@ -90,15 +90,6 @@ public class Game {
 
     @Override
     public String toString() {
-        String playersBlock = "";
-        for (Player player: this.players){
-            playersBlock += player.toString();
-        }
-
-        String headerLine = String.format("Game of %d players, on a %dx%d board",
-                this.players.size(),
-                this.board.getRows(),
-                this.board.getColumns());
 
         String fullFormat =
                 "%s\n" +
@@ -108,37 +99,56 @@ public class Game {
                 "Turn of: %d\n" +
                 "%s" +
                 "\n" +
-                "////////////////  Board  ////////////////\n" +
-                "%s\n\n" +
-                "Time: %s\n" +
-                "\n\n";
+                "//////  Board  //////\n" +
+                "%s\n" +
+                "Time: %s\n\n" +
+                "%s\n";
 
         String shortFormat =
-                "%s\n" +
                 "------------------------------------\n" +
                 "Game started: %s\n" +
                 "Target: %d\n" +
-                "////////////////  Board  ////////////////\n" +
+                "//////  Board  //////\n" +
                 "%s\n\n" +
-                "\n\n";
+                "%s\n";
+
+        String menu =
+                "Commands:\n" +
+                "1 - LOAD config XML file\n" +
+                "2 - START game\n" +
+                "3 - SHOW game state\n" +
+                "4 - PLAY turn\n" +
+                "5 - SHOW history\n" +
+                "6 - EXIT game\n";
 
         if (this.isStarted) {
+            String playersBlock = "";
+            for (Player player: this.players){
+                playersBlock += player.toString();
+            }
+
+            String headerLine = String.format("Game of %d players, on a %dx%d board",
+                    this.players.size(),
+                    this.board.getRows(),
+                    this.board.getColumns());
+
             Date currentTime = new Date();
             String durationString = this.getDurationString(currentTime);
             return String.format(fullFormat,
                     headerLine,
                     this.isStarted.toString(),
                     this.target,
-                    this.currentPlayerIndex,
+                    this.currentPlayerIndex + 1,
                     playersBlock,
                     this.board,
-                    durationString);
+                    durationString,
+                    menu);
         } else {
             return String.format(shortFormat,
-                    headerLine,
                     this.isStarted.toString(),
                     this.target,
-                    this.board);
+                    this.board,
+                    menu);
         }
     }
 }

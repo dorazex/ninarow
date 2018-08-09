@@ -10,10 +10,11 @@ public class Constants {
     public static final String EXIT_PROMPT = "Bye bye!";
     public static final String CHOOSE_COMMAND_PROMPT = "Please enter command: ";
     public static final String INVALID_INPUT_PROMPT = "Command must be an integer between 1-6, then <Enter>";
-    public static final String GAME_LOADED_PROMPT = "Game settings loaded from XML file successfully";
+    public static final String GAME_SUCCESSFULLY_STARTED_PROMPT = "Game started successfully";
     public static final String CONFIG_FILE_PATH_PROMPT = "Please enter FULL ABSOLUTE path for config XML file: ";
-    public static final String INVALID_COMMAND_GAME_ALREADY_STARTED = "Game has already started";
-//    public static final String INVALID_COMMAND_GAME_NOT_STARTED = "Command is valid only after game start";
 
-    public static final String GAME_SHOW_FORMAT = "";
+    public static final String INVALID_COMMAND_GAME_ALREADY_STARTED = "Game has already started";
+    public static final String INVALID_COMMAND_GAME_NOT_LOADED = "No game loaded yet";
+    public static final String INVALID_COMMAND_GAME_NOT_STARTED = "Game not started yet";
+    public static final String CONFIG_XML_ERROR = "Invalid config XML file given: ";
 }
