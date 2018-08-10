@@ -137,15 +137,24 @@ public class Board {
     public String toString() {
         String boardString = "";
         for (int i = 0; i < this.rows; i++) {
-            boardString += String.format("%d ", this.rows - i);
+            String padding = "  ";
+            if (this.rows - i > 9){
+                padding = " ";
+            }
+            boardString += String.format("%d%s", this.rows - i, padding);
             for (ArrayList<Integer> column: this.cells){
-                boardString += this.playersDiscTypeMap.get(column.get(i)) + " ";
+
+                boardString += this.playersDiscTypeMap.get(column.get(i)) + "  ";
             }
             boardString += "\n";
         }
-        boardString += "  ";
+        boardString += "   ";
         for (int i = 0; i < this.columns; i++) {
-            boardString += String.format("%d ", i + 1);
+            String padding = "  ";
+            if (i + 1 > 9){
+                padding = " ";
+            }
+            boardString += String.format("%d%s", i + 1, padding);
         }
 
         return boardString;
