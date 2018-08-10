@@ -55,10 +55,10 @@ public class XmlLoader {
             if (!(((Integer)parametersMap.get("columns")) >= 6 && ((Integer)parametersMap.get("columns")) <= 60)){
                 throw new ConfigXmlException("Columns value must be in range 6-60 inclusive");
             }
-//            if (!(((Integer)parametersMap.get("target")) < ((Integer)parametersMap.get("columns")) &&
-//                    ((Integer)parametersMap.get("target")) < ((Integer)parametersMap.get("columns")))){
-//                throw new ConfigXmlException("Target value must be less than both rows and columns value");
-//            }
+            if (!(((Integer)parametersMap.get("target")) < ((Integer)parametersMap.get("columns")) &&
+                    ((Integer)parametersMap.get("target")) < ((Integer)parametersMap.get("columns")))){
+                throw new ConfigXmlException("Target value must be less than both rows and columns value");
+            }
 
 
         } catch (ParserConfigurationException | IOException | SAXException e) {
