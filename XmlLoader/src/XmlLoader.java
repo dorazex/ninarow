@@ -56,7 +56,7 @@ public class XmlLoader {
                 throw new ConfigXmlException("Columns value must be in range 6-60 inclusive");
             }
             if (!(((Integer)parametersMap.get("target")) < ((Integer)parametersMap.get("columns")) &&
-                    ((Integer)parametersMap.get("target")) < ((Integer)parametersMap.get("columns")))){
+                    ((Integer)parametersMap.get("target")) < ((Integer)parametersMap.get("rows")))){
                 throw new ConfigXmlException("Target value must be less than both rows and columns value");
             }
 

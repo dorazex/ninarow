@@ -120,8 +120,8 @@
       <file leaf-file-name="XmlLoader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/XmlLoader/src/XmlLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="60" selection-end-column="13" />
+            <state relative-caret-position="192">
+              <caret line="58" column="94" selection-start-line="58" selection-start-column="94" selection-end-line="58" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -370,7 +370,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1537" height="912" extended-state="6" />
+    <frame x="1664" y="-11" width="1857" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -383,13 +383,13 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.6885246" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49671054" visible="true" weight="0.2495114" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49671054" visible="true" weight="0.206469" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32889345" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="2" sideWeight="0.50328946" side_tool="true" weight="0.206469" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.48994976" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39959016" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -908,8 +908,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/XmlLoader/src/XmlLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="60" selection-end-column="13" />
+        <state relative-caret-position="192">
+          <caret line="58" column="94" selection-start-line="58" selection-start-column="94" selection-end-line="58" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
