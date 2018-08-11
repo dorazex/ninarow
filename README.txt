@@ -12,7 +12,6 @@ Instructions
 3.	Running one of the non-main JARs will only print a stub text of the module name
 
 
-
 Assumptions
 ============
 1.	All assumptions described in the exercise
