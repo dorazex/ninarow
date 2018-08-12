@@ -1,8 +1,13 @@
+ninarow - ex1
+------------
+Name: Dor Azouri
+ID: 204034300
+------------
+
 Instructions
 ============
 1.	Double click the given batch file.
 	The batch file executes the main module's jar: 'ninarow.jar'.
-	It is dependent of the
 2.	There are 4 modules in this project (including the main ninarow), each with a corresponding JAR artifact:
 	ninarow -				main, depends on the other 3
 	GameEngine -			the core game logic and classes needed
