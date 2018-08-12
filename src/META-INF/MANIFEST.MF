@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Class-Path: . ../ConsoleUserInterface_jar/ConsoleUserInterface.jar
+Class-Path: ConsoleUserInterface.jar
 Main-Class: Main
 

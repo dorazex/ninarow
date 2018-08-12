@@ -58,7 +58,8 @@ public class Game {
         long diffInSeconds = (currentDate.getTime() - this.startDate.getTime()) / 1000;
         long seconds = Math.floorMod(diffInSeconds, 60);
         long minutes = Math.floorDiv(diffInSeconds, 60);
-        return String.format("%d:%d", minutes, seconds);
+
+        return String.format("%02d:%02d", minutes, seconds);
     }
 
     private void advanceToNextPlayer(){
